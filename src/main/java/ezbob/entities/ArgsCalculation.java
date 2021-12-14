@@ -1,12 +1,12 @@
 package ezbob.entities;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class ArgsCalculation implements Serializable {
-
     private OperatorTypeEnum operatorTypeEnum;
-    private int[] numbers = new int[]{};
 
+    private int[] numbers = new int[]{};
     public ArgsCalculation() {
     }
 
@@ -27,6 +27,13 @@ public class ArgsCalculation implements Serializable {
         return this.operatorTypeEnum;
     }
 
+    @Override
+    public String toString() {
+        return "ArgsCalculation{" +
+                "operatorTypeEnum=" + operatorTypeEnum +
+                ", numbers=" + Arrays.toString(numbers) +
+                '}';
+    }
 
 
 }
