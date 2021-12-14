@@ -5,8 +5,8 @@ import ezbob.entities.OperatorTypeEnum;
 
 import ezbob.services.CalculatorService;
 import ezbob.utils.WsAddressConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ import java.util.stream.IntStream;
 @RequestMapping(WsAddressConstants.calculateLogicUrl)
 public class CalculationController {
 
-    private final static Logger logger =  LoggerFactory.getLogger(CalculationController.class);
+    private final static Logger logger =  LogManager.getLogger(CalculationController.class);
 
     private Map<OperatorTypeEnum, DoCalculate> calcOperatorEnumMap = new HashMap<>();
 
