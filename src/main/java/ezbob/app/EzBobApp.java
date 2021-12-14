@@ -6,7 +6,11 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"ezbob.controllers","ezbob.services"})
+@ComponentScan(basePackages = {
+        "ezbob.controllers",
+        "ezbob.configuration",
+        "ezbob.services"
+})
 public class EzBobApp extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
