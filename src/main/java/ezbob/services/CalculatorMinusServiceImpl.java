@@ -3,16 +3,14 @@ package ezbob.services;
 import ezbob.entities.OperatorTypeEnum;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.IntStream;
+
 @Component
 public class CalculatorMinusServiceImpl implements CalculatorService {
 
     @Override
     public int calc(int[] argsToCalc) {
-        int result = 0;
-        for (int item : argsToCalc) {
-            result -= item;
-        }
-        return result;
+        return IntStream.of(argsToCalc).reduce((a, b) -> (a - b)).getAsInt();
     }
 
     @Override

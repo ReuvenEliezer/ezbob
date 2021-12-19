@@ -21,7 +21,7 @@ public class CalculatorTest {
 
     private static RestTemplate restTemplate;
 
-    private static final String CALCULATE_ARGS = "calculateArgs";
+    private static final String CALCULATE_ARGS = "calculateArgsA";
 
     @BeforeClass
     public static void beforeClass() {
@@ -42,7 +42,7 @@ public class CalculatorTest {
         int[] arr = new int[]{1, 2, 3, 4, 5};
         ArgsCalculation argsCalculation = new ArgsCalculation(arr, OperatorTypeEnum.MINUS);
         Integer result = restTemplate.postForObject(WsAddressConstants.calculateFullUrl + CALCULATE_ARGS, argsCalculation, Integer.class);
-        Assert.assertEquals("calculation result not as expected", -15, result.intValue());
+        Assert.assertEquals("calculation result not as expected", -13, result.intValue());
     }
 
     @Test
@@ -51,9 +51,18 @@ public class CalculatorTest {
         ArgsCalculation argsCalculation = new ArgsCalculation(arr, null);
         try {
             restTemplate.postForObject(WsAddressConstants.calculateFullUrl + CALCULATE_ARGS, argsCalculation, Integer.class);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             return;
         }
         Assert.fail("not valid operations not handling");
     }
+
+    @Test(expected = RuntimeException.class)
+    public void unsupportedOperation1Test() {
+        int[] arr = new int[]{1, 2, 3, 4, 5};
+        ArgsCalculation argsCalculation = new ArgsCalculation(arr, null);
+        restTemplate.postForObject(WsAddressConstants.calculateFullUrl + CALCULATE_ARGS, argsCalculation, Integer.class);
+    }
+
+
 }

@@ -22,7 +22,7 @@ import java.util.stream.IntStream;
 @RequestMapping(WsAddressConstants.calculateLogicUrl)
 public class CalculationController {
 
-    private final static Logger logger =  LogManager.getLogger(CalculationController.class);
+    private final static Logger logger = LogManager.getLogger(CalculationController.class);
 
     private Map<OperatorTypeEnum, DoCalculate> calcOperatorEnumMap = new HashMap<>();
 
@@ -34,11 +34,7 @@ public class CalculationController {
     }
 
     private int calcMinus(int[] argsToCalc) {
-        int result = 0;
-        for (int item : argsToCalc) {
-            result -= item;
-        }
-        return result;
+        return IntStream.of(argsToCalc).reduce((a, b) -> (a - b)).getAsInt();
     }
 
     private int calcPlus(int[] argsToCalc) {
@@ -72,20 +68,5 @@ public class CalculationController {
         logger.debug(String.format("%s The result is %s", methodName, result));
         return result;
     }
-
-    @RequestMapping(method = RequestMethod.POST, value = "calculateArgs")
-    public Integer calculateArgs(@RequestBody ArgsCalculation argsCalculation) {
-        String methodName = "calculateArgs:";
-        CalculatorService calculatorService = operatorTypeEnumCalculatorServiceMap.get(argsCalculation.getOperatorTypeEnum());
-        if (calculatorService == null) {
-            String message = String.format(methodName, "UnsupportedOperation for OperatorTypeEnum %s", argsCalculation.getOperatorTypeEnum());
-            logger.error(message);
-            throw new UnsupportedOperationException(message);
-        }
-        int result = calculatorService.calc(argsCalculation.getNumbers());
-        logger.debug(String.format("%s The result is %s", methodName, result));
-        return result;
-    }
-
 
 }
