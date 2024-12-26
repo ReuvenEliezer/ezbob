@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.stream.IntStream;
 
 @Component
-public class CalculatorPlusServiceImpl implements CalculatorService {
+public class CalculatorPlusHandlerImpl implements CalculatorHandler {
 
     @Override
     public int calc(int[] argsToCalc) {

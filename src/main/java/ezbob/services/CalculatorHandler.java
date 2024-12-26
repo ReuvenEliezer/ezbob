@@ -2,7 +2,7 @@ package ezbob.services;
 
 import ezbob.entities.OperatorTypeEnum;
 
-public interface CalculatorService {
+public interface CalculatorHandler {
 
     int calc(int[] argsToCalc);
 
