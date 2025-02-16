@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -28,7 +29,8 @@ public class CalculationHandlerConfig {
 
     @Bean
     public Map<OperatorTypeEnum, CalculatorHandler> calculationHandlers2(Map<String, CalculatorHandler> beansMap) {
-        Map<OperatorTypeEnum, CalculatorHandler> handlerMap = new HashMap<>(beansMap.size());
+        Map<OperatorTypeEnum, CalculatorHandler> handlerMap = new EnumMap<>(OperatorTypeEnum.class);
+//        Map<OperatorTypeEnum, CalculatorHandler> handlerMap = new HashMap<>(beansMap.size());
         Map<Class<? extends CalculatorHandler>, OperatorTypeEnum> operatorTypeEnumMap = Arrays.stream(OperatorTypeEnum.values())
                 .collect(Collectors.toMap(OperatorTypeEnum::getCalculatorService, Function.identity()));
 
