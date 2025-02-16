@@ -29,12 +29,12 @@ public class CalculationHandlerConfig {
     @Bean
     public Map<OperatorTypeEnum, CalculatorHandler> calculationHandlers2(Map<String, CalculatorHandler> beansMap) {
         Map<OperatorTypeEnum, CalculatorHandler> handlerMap = new HashMap<>(beansMap.size());
-        Map<Class<? extends CalculatorHandler>, OperatorTypeEnum> notificationChannelMap = Arrays.stream(OperatorTypeEnum.values())
+        Map<Class<? extends CalculatorHandler>, OperatorTypeEnum> operatorTypeEnumMap = Arrays.stream(OperatorTypeEnum.values())
                 .collect(Collectors.toMap(OperatorTypeEnum::getCalculatorService, Function.identity()));
 
         for (Map.Entry<String, CalculatorHandler> handlerEntry : beansMap.entrySet()) {
             CalculatorHandler handler = handlerEntry.getValue();
-            OperatorTypeEnum channel = notificationChannelMap.get(handler.getClass());
+            OperatorTypeEnum channel = operatorTypeEnumMap.get(handler.getClass());
             handlerMap.put(channel, handlerEntry.getValue());
         }
         return handlerMap;
